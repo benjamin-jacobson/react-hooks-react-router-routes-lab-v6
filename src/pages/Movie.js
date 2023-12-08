@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import { useParams } from "react-router-dom";
+import { mockComponent } from "react-dom/test-utils";
 
 
 
@@ -20,16 +21,19 @@ const movieIddd = params.id;
     .catch(error => console.log(error))
   }, [movieIddd]);
 
+  
   if (!movieData){
     return <h1>Loading Ben...</h1>;
   };
 
-    // Need to fix this!!
-  if (!movieData) {
+  function ifMovieData(){
+  if (movieData ===null) {
     const movieDataDisplay = <div></div>;
+    return movieDataDisplay
   } else {
-    const movieDataDisplay = `For ${movieData.id} called ${movieData.title}, these are the genres: ${movieData.genres}`
-  }
+     const movieDataDisplay = `For ${movieData.id} called ${movieData.title}, these are the genres: ${movieData.genres}`
+    return movieDataDisplay
+    };}
 
   return (
     <>
@@ -37,7 +41,8 @@ const movieIddd = params.id;
       <NavBar />
       </header>
       <main>
-        {movieDataDisplay}
+
+        {ifMovieData()}
         <h1> Movie Page!</h1>
       </main>
     </>
